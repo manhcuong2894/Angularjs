@@ -1,0 +1,137 @@
+<!-- <div ui-view> -->
+  <div class="page-title">
+    <div class="title_left">
+      <h3>{{title}}</h3>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Tìm kiếm
+            <!--<small>different form elements</small>-->
+          </h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <form id="demo-form2" name="formRight" method="post" class="form-horizontal form-label-left" novalidate>
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="group_name" class="control-label" style="padding: 0">Tên nhóm</label>
+                  <input type="text" class="form-control" id="group_name" ng-model="right.group_name">
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="padding: 0">&#32;</label>
+                  <div class=form-control">
+                    <a class="btn btn-success pull-right btn-search" ng-if="checkRight(25)" ui-sref="right.add"><i
+                      class="fa fa-plus"></i> Thêm mới</a>
+                    <button ng-click="getRight(1)" class="btn btn-primary pull-right btn-search"><i
+                      class="fa fa-search"></i> Tìm kiếm
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Danh sách nhóm quyền
+            <small>Tổng số nhóm quyền: {{totalRight}}</small>
+          </h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+
+          <!--<p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p>-->
+          <div id="no-more-tables" class="table-responsive">
+            <table class="table table-striped jambo_table bulk_action table-bordered" ng-if="noData == 0">
+              <thead>
+                <tr class="headings">
+                  <th class="column-title">STT</th>
+                  <th class="column-title">Tên nhóm</th>
+                  <th class="column-title">Mô tả</th>
+                  <th class="column-title">Người tạo</th>
+                  <th class="column-title">Thời gian tạo</th>
+                  <th class="column-title">Người cập nhật</th>
+                  <th class="column-title">Thời gian cập nhật</th>
+                  <th class="column-title no-link last"><span class="nobr">Hành động</span>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+              <tr>
+                <td colspan="8" style="text-align: center">Không tìm thấy kết quả theo yêu cầu!</td>
+              </tr>
+              </tbody>
+            </table>
+
+            <table class="table table-striped jambo_table bulk_action table-bordered" ng-if="noData == 1">
+              <thead>
+              <tr class="headings">
+                <th class="column-title">STT</th>
+                <th class="column-title">Tên nhóm</th>
+                <th class="column-title">Mô tả</th>
+                <th class="column-title">Người tạo</th>
+                <th class="column-title">Thời gian tạo</th>
+                <th class="column-title">Người cập nhật</th>
+                <th class="column-title">Thời gian cập nhật</th>
+                <th class="column-title no-link last"><span class="nobr">Hành động</span>
+                </th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr class="even pointer" dir-paginate="right in rights | itemsPerPage: rightPerPage"
+                total-items="totalRight"
+                current-page="pagination.current">
+                <td data-title="STT" class="a-center ">{{$index + 1 + 10 * (pagination.current - 1)}}</td>
+                <td data-title="Tên nhóm">{{right.groupName}}</td>
+                <td data-title="Mô tả">{{right.description}}</td>
+                <td data-title="Người tạo">{{right.createBy}}</td>
+                <td data-title="Thời gian tạo">{{right.createAt | date : "dd/MM/yyyy HH:mm:ss"}}</td>
+                <td data-title="Người cập nhật">{{right.editedBy}}</td>
+                <td data-title="Thời gian cập nhật" class="a-right a-right ">{{right.editedAt | date : "dd/MM/yyyy HH:mm:ss"}}</td>
+                <td data-title="Hành động" class=" last">
+                  <a class="btn" ui-sref="right.detail({id:right.id})" ng-if="checkRight(28)"><i title="Xem thông tin nhóm quyền" class="fa fa-search" aria-hidden="true"></i></a>
+                  <a class="btn" ui-sref="right.edit({id:right.id})" ng-if="checkRight(26)"><i title="Sửa thông tin nhóm quyền" class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                  <a class="btn" ui-sref="right.delete({id:right.id})" ng-if="checkRight(27)"><i title="Xóa nhóm quyền" class="fa fa-trash" aria-hidden="true"></i></a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <dir-pagination-controls ng-if="noData == 1" on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- </div> -->

@@ -1,0 +1,2 @@
++App.controller('ServiceDetailCtrl', function() {
+});

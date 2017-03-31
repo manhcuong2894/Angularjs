@@ -1,0 +1,99 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>{{title}}</h3>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Thêm mới tài liệu
+          <!--<small>different form elements</small>-->
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <form id="demo-form2" name="documentAddForm" method="post" class="form-horizontal form-label-left"
+              ng-submit="save()" novalidate>
+
+          <div class="form-group"
+               ng-class="{ 'has-error':documentAddForm.file_name.$touched && documentAddForm.file_name.$invalid }">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="file_name">Tên file <span
+              class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type="text" class="form-control col-md-7 col-xs-12" name="file_name" id="file_name"
+                     ng-model="document.fileName" ng-minlength="5" ng-maxlength="30"
+                     ng-pattern="/^[^\-\!\[\]\{\}&#34;\'\>\<\%\^\*\?\/\\\|\,\;\:\+\=\(\)]*$/" required>
+              <div class="help-block" ng-messages="documentAddForm.file_name.$error"
+                   ng-if="documentAddForm.file_name.$touched">
+                <p ng-message="required">Vui lòng nhập tên file!</p>
+                <p ng-message="minlength">Tên file phải có ít nhất 5 ký tự!</p>
+                <p ng-message="maxlength">Tên file không được dài quá 30 ký tự!</p>
+                <p ng-message="pattern">Tên file chỉ được có các ký tự đặc biệt sau: &#64;, &#36;, &#35;, &amp;</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group"
+               ng-class="{ 'has-error':documentAddForm.service_docu.$touched && documentAddForm.service_docu.$invalid }">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="service_docu">Dịch vụ <span
+              class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <select class="form-control" id="service_docu" name="service_docu" ng-model="document.service" required>
+                <option value="">- Chọn -</option>
+                <option ng-repeat="service in services" value="{{service.id}}">{{service.shortName}}</option>
+              </select>
+              <div class="help-block" ng-messages="documentAddForm.service_docu.$error"
+                   ng-if="documentAddForm.service_docu.$touched">
+                <p ng-message="required">Vui lòng chọn dịch vụ!</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="des_docu">Mô tả</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <textarea name="des_docu" rows="5" class="form-control" id="des_docu"
+                        ng-model="document.description"></textarea>
+            </div>
+          </div>
+
+          <div class="form-group"
+               ng-class="{ 'has-error':documentAddForm.select_file.$touched && documentAddForm.select_file.$invalid }">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="select_file">&#32;</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type="file" name="select_file" id="select_file" ng-model="localFile" file-model1="uploadFile"
+                     value="Chọn file upload" data-icon="false" required/>
+              <div class="help-block" ng-messages="documentAddForm.select_file.$error"
+                   ng-if="documentAddForm.select_file.$touched">
+                <p ng-message="required">Vui lòng chọn file upload!</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="ln_solid"></div>
+
+          <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+              <input type="submit"
+                     ng-disabled="!documentAddForm.$dirty || (documentAddForm.$dirty && documentAddForm.$invalid)"
+                     class="btn btn-success" value="Upload"/>
+              <a ui-sref="document.list" class="btn btn-danger">Hủy bỏ</a>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

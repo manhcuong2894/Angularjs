@@ -1,0 +1,2 @@
++App.controller('RightCtrl', function() {
+});

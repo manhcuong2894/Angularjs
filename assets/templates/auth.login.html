@@ -1,0 +1,44 @@
+<div class="login">
+  <!--<div flash-message="5000" class="coupon-flash"></div>-->
+  <div>
+    <div class="login_wrapper">
+      <div class="animate form login_form">
+        <section class="login_content">
+          <form name="loginForm" method="post" ng-submit="login()" novalidate>
+            <h1 style="font-family: cursive;">Đăng nhập hệ thống</h1>
+            <div class="form-control-login" ng-class="{ 'has-error':loginForm.user_name.$touched && loginForm.user_name.$invalid }">
+              <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Tài khoản" ng-model="info.username" required/>
+              <div class="help-block" ng-messages="loginForm.user_name.$error" ng-if="loginForm.user_name.$touched">
+                <p ng-message="required">Vui lòng nhập tài khoản!</p>
+              </div>
+            </div>
+            <div class="form-control-login" ng-class="{ 'has-error':loginForm.password.$touched && loginForm.password.$invalid }">
+              <input type="password" id="password" name="password" class="form-control" placeholder="Mật khẩu" ng-model="info.password" required/>
+              <div class="help-block" ng-messages="loginForm.password.$error" ng-if="loginForm.password.$touched">
+                <p ng-message="required">Vui lòng nhập mật khẩu!</p>
+              </div>
+            </div>
+            <div>
+              <input type="submit" class="btn btn-default submit submit-login" value="Đăng nhập" style="line-height: 18px;"/>
+              <a class="reset_pass" href="javascript:;">Quên mật khẩu?</a>
+              <!--<input type="reset" class="btn btn-danger submit submit-login" style="line-height: 18px;" value="Hủy bỏ"/>-->
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="separator">
+
+              <div class="clearfix"></div>
+              <br />
+
+              <div>
+                <h1 style="font-size: 18px; letter-spacing: 1px;"><i class="fa fa-users"></i> Helpdesk management system</h1>
+                <p style="color: #ddd">©2016 All Rights Reserved. Helpdesk is a management system of ATK. Privacy and Terms</p>
+              </div>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!-- container -->

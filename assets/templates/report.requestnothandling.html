@@ -1,0 +1,152 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>{{title}}</h3>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Tìm kiếm
+          <!--<small>different form elements</small>-->
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <form id="demo-form2" name="formDemo" method="post" class="form-horizontal form-label-left" novalidate>
+
+          <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="handler_group_id" class="control-label" style="padding: 0">Nhóm xử lý</label>
+                <select class="select2_multiple form-control" name="handler_group_id" id="handler_group_id"
+                        ng-model="reportNoHandling.handler_group_id" multiple="multiple">
+                  <option ng-repeat="rightGroup in rightGroups" value="{{rightGroup.id}}">{{rightGroup.groupName}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="year" class="control-label" style="padding: 0">Năm</label>
+                <select class="form-control" id="year" ng-model="reportNoHandling.year_request" ng-options="value.id as value.label for value in years"></select>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group" style="margin-top: 18px; margin-bottom: 0">
+                <label class="control-label" style="padding: 0">&#32;</label>
+                <a ng-click="exportReportNoHandling()" class="btn btn-success pull-right btn-search" style="margin-right: 0;"><i
+                  class="fa fa-download"></i> Xuất excel</a>
+                <button ng-click="getReportNoHandling()" class="btn btn-primary pull-right btn-search"><i
+                  class="fa fa-search"></i> Tìm kiếm
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Danh sách báo cáo các yêu cầu chưa được xử lý</h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="x_content">
+        <div id="no-more-tables" class="table-responsive">
+
+          <table class="table table-striped jambo_table bulk_action table-bordered request-table" ng-if="noData == 0">
+            <thead>
+            <tr class="headings">
+              <th class="column-title">Người xử lý</th>
+              <th class="column-title">T1</th>
+              <th class="column-title">T2</th>
+              <th class="column-title">T3</th>
+              <th class="column-title">T4</th>
+              <th class="column-title">T5</th>
+              <th class="column-title">T6</th>
+              <th class="column-title">T7</th>
+              <th class="column-title">T8</th>
+              <th class="column-title">T9</th>
+              <th class="column-title">T10</th>
+              <th class="column-title">T11</th>
+              <th class="column-title">T12</th>
+              <th class="column-title">Tổng</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+              <td colspan="14" style="text-align: center">Không tìm thấy kết quả theo yêu cầu!</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <table class="table tr-last table-striped jambo_table bulk_action table-bordered request-table" ng-if="noData == 1">
+            <thead>
+            <tr class="headings">
+              <th class="column-title">Người xử lý</th>
+              <th class="column-title">T1</th>
+              <th class="column-title">T2</th>
+              <th class="column-title">T3</th>
+              <th class="column-title">T4</th>
+              <th class="column-title">T5</th>
+              <th class="column-title">T6</th>
+              <th class="column-title">T7</th>
+              <th class="column-title">T8</th>
+              <th class="column-title">T9</th>
+              <th class="column-title">T10</th>
+              <th class="column-title">T11</th>
+              <th class="column-title">T12</th>
+              <th class="column-title">Tổng</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr class="even pointer" ng-repeat="reportNoHand in reportNoHands">
+              <td data-title="Người xử lý" class="a-center ">{{reportNoHand.TenDayDu}}</td>
+              <td data-title="T1">{{reportNoHand.T1}}</td>
+              <td data-title="T2">{{reportNoHand.T2}}</td>
+              <td data-title="T3">{{reportNoHand.T3}}</td>
+              <td data-title="T4">{{reportNoHand.T4}}</td>
+              <td data-title="T5">{{reportNoHand.T5}}</td>
+              <td data-title="T6">{{reportNoHand.T6}}</td>
+              <td data-title="T7">{{reportNoHand.T7}}</td>
+              <td data-title="T8">{{reportNoHand.T8}}</td>
+              <td data-title="T9">{{reportNoHand.T9}}</td>
+              <td data-title="T10">{{reportNoHand.T10}}</td>
+              <td data-title="T11">{{reportNoHand.T11}}</td>
+              <td data-title="T12">{{reportNoHand.T12}}</td>
+              <td data-title="Tổng">{{reportNoHand.Tong}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

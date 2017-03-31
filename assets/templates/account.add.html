@@ -1,0 +1,168 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>{{title}}</h3>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Thêm mới người dùng
+          <!--<small>different form elements</small>-->
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <form id="demo-form2" name="accountAddForm" method="post" class="form-horizontal form-label-left"
+              ng-submit="save()" novalidate>
+
+          <div class="form-group"
+               ng-class="{ 'has-error':accountAddForm.user_name.$touched && accountAddForm.user_name.$invalid }">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="user_name">Tên đăng nhập <span
+              class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type="text" class="form-control col-md-7 col-xs-12" ng-pattern="/^[a-zA-Z0-9]*$/" name="user_name"
+                     id="user_name" required ng-model="account.username" ng-maxlength="50">
+              <div class="help-block" ng-messages="accountAddForm.user_name.$error"
+                   ng-if="accountAddForm.user_name.$touched">
+                <p ng-message="required">Vui lòng nhập tên đăng nhập!</p>
+                <p ng-message="maxlength">Tên đăng nhập không được quá 50 kí tự!</p>
+                <p ng-message="pattern">Tên đăng nhập không chứa ký tự đặc biệt, không bao gồm khoảng trắng và ký tự
+                  Tiếng Việt!</p>
+              </div>
+            </div>
+          </div>
+          <div class="form-group"
+               ng-class="{ 'has-error':accountAddForm.full_name.$touched && accountAddForm.full_name.$invalid }">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="full_name">Họ và tên <span
+              class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type="text" class="form-control col-md-7 col-xs-12" name="full_name" id="full_name"
+                     ng-maxlength="150" ng-model="account.fullName" required
+                     ng-pattern="/^[^\-\!\[\]\{\}&#34;\'\>\<\%\^\*\?\/\\\|\,\;\:\+\=\(\)\@\$\&\!\.\#\_]*$/">
+              <div class="help-block" ng-messages="accountAddForm.full_name.$error"
+                   ng-if="accountAddForm.full_name.$touched">
+                <p ng-message="required">Vui lòng nhập họ và tên!</p>
+                <p ng-message="maxlength">Họ và tên không được quá 150 ký tự!</p>
+                <p ng-message="pattern">Họ tên không chứa ký tự đặc biệt!</p>
+              </div>
+            </div>
+          </div>
+          <div class="form-group"
+               ng-class="{ 'has-error':accountAddForm.email.$touched && accountAddForm.email.$invalid }">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type="email" ng-pattern="/^[a-z0-9]+[a-z0-9._]+@[a-z]+\.[a-z.]{1,10}$/"
+                     class="form-control col-md-7 col-xs-12" name="email" id="email" ng-model="account.email" required>
+              <div class="help-block" ng-messages="accountAddForm.email.$error" ng-if="accountAddForm.email.$touched">
+                <p ng-message="required">Vui lòng nhập email!</p>
+                <p ng-message="pattern">Email không đúng định dạng!</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group"
+               ng-class="{ 'has-error':accountAddForm.phone_number.$touched && accountAddForm.phone_number.$invalid }">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone_number">Số điện thoại</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type="text" ng-maxlength="12" ng-pattern="/^(0|84)(1[2689]|9|8)[0-9]{8}$/"
+                     class="form-control col-md-7 col-xs-12" name="phone_number" ng-model="account.phoneNumber"
+                     id="phone_number">
+              <div class="help-block" ng-messages="accountAddForm.phone_number.$error"
+                   ng-if="accountAddForm.phone_number.$touched">
+                <p ng-message="pattern">Số điện thoại không đúng định dạng!</p>
+                <p ng-message="maxlength">Số điện thoại không được dài hơn 12 ký tự số!</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group"
+               ng-class="{ 'has-error':accountAddForm.password.$touched && accountAddForm.password.$invalid }">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Mật khẩu <span
+              class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input ng-pattern="/^[a-zA-Z0-9@$#&]*$/" ng-model="account.password" type="password"
+                     class="form-control col-md-7 col-xs-12" name="password" id="password" ng-minlength="6"
+                     ng-maxlength="50" ng-trim="false" required>
+              <div class="help-block" ng-messages="accountAddForm.password.$error"
+                   ng-if="accountAddForm.password.$touched">
+                <p ng-message="required">Vui lòng nhập mật khẩu!</p>
+                <p ng-message="minlength">Mật khẩu phải có ít nhất 6 ký tự!</p>
+                <p ng-message="maxlength">Mật khẩu không dài quá 50 ký tự!</p>
+                <p ng-message="pattern">Mật khẩu chỉ có thể có &#64;, &#36; &#35;, &#38;, không bao gồm khoảng trắng và
+                  ký tự Tiếng Việt!</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group"
+               ng-class="{ 'has-error':accountAddForm.confirm_pwd.$touched && accountAddForm.confirm_pwd.$invalid }">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="confirm_pwd">Xác nhận mật khẩu <span
+              class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input ng-pattern="{{account.password}}" type="password" class="form-control col-md-7 col-xs-12"
+                     name="confirm_pwd" id="confirm_pwd" ng-model="account.confirm_password" ng-minlength="6"
+                     ng-maxlength="50" required>
+              <div class="help-block" ng-messages="accountAddForm.confirm_pwd.$error"
+                   ng-if="accountAddForm.confirm_pwd.$touched">
+                <p ng-message="required">Vui lòng nhập xác nhận mật khẩu!</p>
+                <p ng-message="minlength">Xác nhận mật khẩu phải có ít nhất 6 ký tự!</p>
+                <p ng-message="maxlength">Xác nhận mật khẩu không dài quá 50 ký tự!</p>
+                <p ng-message="pattern">Giá trị xác nhận mật khẩu không trùng với mật khẩu!</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="role">Phân quyền</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <select class="form-control" ng-model="account.roleId"
+                      ng-options="right.id as right.groupName for right in rights" name="role" id="role">
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="manager">Quản lý</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type="checkbox" style="margin-top: 12px;" name="manager" id="manager" ng-model="account.manager" checked ng-true-value="'1'" ng-false-value="'0'">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="role">Avatar</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type="file" style="margin-top: 7px;" name="myImage" image-with-preview ng-model="image" file-model="uploadFile"/>
+              <img style="width: 30%; margin-top: 15px;" ng-show="image.src" ng-src="{{image.src}}"/>
+            </div>
+          </div>
+
+          <div class="ln_solid"></div>
+
+          <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+              <input type="submit"
+                     ng-disabled="!accountAddForm.$dirty || (accountAddForm.$dirty && accountAddForm.$invalid)"
+                     class="btn btn-success" value="Thêm mới"/>
+              <a ui-sref="account.list" class="btn btn-danger">Hủy bỏ</a>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,177 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>{{title}}</h3>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Tìm kiếm
+          <!--<small>different form elements</small>-->
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <form id="demo-form2" name="formDemo" method="post" class="form-horizontal form-label-left" novalidate>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="service_name" class="control-label" style="padding: 0">Dịch vụ</label>
+                <input type="text" class="form-control" id="service_name" ng-model="service.short_name">
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="service_name" class="control-label" style="padding: 0">&#32;</label>
+                <div class=form-control">
+                  <a ng-if="checkRight(31)" ui-sref="service.add" style="margin-right: 0" class="btn btn-success pull-right btn-search"><i
+                    class="fa fa-plus"></i> Thêm mới</a>
+                  <button ng-click="getService(1)" class="btn btn-primary pull-right btn-search"><i
+                    class="fa fa-search"></i> Tìm kiếm
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Danh sách dịch vụ
+          <small>Tổng số dịch vụ: {{totalService}}</small>
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="x_content">
+
+        <!--<p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p>-->
+
+        <div id="no-more-tables" class="table-responsive">
+          <table class="table table-striped jambo_table bulk_action table-bordered" ng-if="noData == 0">
+            <thead>
+            <tr class="headings">
+              <th class="column-title">STT</th>
+              <th class="column-title">Dịch vụ</th>
+              <th class="column-title">SLA</th>
+              <th class="column-title" style="width: 20%">Mô tả</th>
+              <th class="column-title">Người tạo</th>
+              <th class="column-title">Thời gian tạo</th>
+              <th class="column-title">Người cập nhật</th>
+              <th class="column-title">Thời gian cập nhật</th>
+              <th class="column-title no-link last"><span class="nobr">Hành động</span>
+              </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+              <td colspan="9" style="text-align: center">Không tìm thấy kết quả theo yêu cầu!</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <table class="table table-striped jambo_table bulk_action table-bordered" ng-if="noData == 1">
+            <thead>
+            <tr class="headings">
+              <th class="column-title">STT</th>
+              <th class="column-title">Dịch vụ</th>
+              <th class="column-title">SLA</th>
+              <th class="column-title" style="width: 20%">Mô tả</th>
+              <th class="column-title">Người tạo</th>
+              <th class="column-title">Thời gian tạo</th>
+              <th class="column-title">Người cập nhật</th>
+              <th class="column-title">Thời gian cập nhật</th>
+              <th class="column-title no-link last"><span class="nobr">Hành động</span>
+              </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr class="even pointer" dir-paginate="service in services | itemsPerPage: servicePerPage"
+                total-items="totalService"
+                current-page="pagination.current">
+              <td data-title="STT" class="a-center ">{{$index + 1}}</td>
+              <td data-title="Dịch vụ">{{service.shortName}}</td>
+              <td data-title="SLA">
+                <label style="margin-bottom: 0; font-weight: normal">{{service.number}} <span
+                  ng-if="service.sla == 1 && service.number > 0">ngày</span> <span
+                  ng-if="service.sla == 2 && service.number > 0">giờ</span></label>
+              </td>
+              <td data-title="Mô tả" style="width: 20%">{{service.description}}</td>
+              <td data-title="Người tạo">{{service.createBy}}</td>
+              <td data-title="Thời gian tạo">{{service.createAt | date : "dd/MM/yyyy HH:mm:ss"}}</td>
+              <td data-title="Người cập nhật">{{service.editedBy}}</td>
+              <td data-title="Thời gian cập nhật" class="a-right a-right ">{{service.editedAt | date : "dd/MM/yyyy HH:mm:ss"}}</td>
+              <td data-title="Hành động" class=" last">
+                <a ng-if="service.status == 1 && checkRight(32)" class="btn" data-placement="top" title="Trạng thái hoạt động"
+                   data-toggle="modal"
+                   ng-click="getInfo(service.id, service.status)" data-target=".bs-example-modal-sm"><i
+                  class="fa fa-check"
+                  aria-hidden="true"></i></a>
+                <a ng-if="service.status == 0 && checkRight(32)" class="btn" style="color: red" data-placement="top"
+                   title="Trạng thái ngừng hoạt động" data-toggle="modal"
+                   ng-click="getInfo(service.id, service.status)" data-target=".bs-example-modal-sm"><i
+                  class="fa fa-times"></i></a>
+                <a class="btn" ui-sref="service.edit({id:service.id})" ng-if="checkRight(32)"><i title="Sửa thông tin dịch vụ"
+                                                                          class="fa fa-pencil-square-o"
+                                                                          aria-hidden="true"></i></a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <dir-pagination-controls ng-if="noData == 1" on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal cập nhật trạng thái -->
+<div class="modal fade bs-example-modal-sm" id="confirm_service" tabindex="-1" role="dialog"
+     aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Thông báo</h4>
+      </div>
+
+      <div class="modal-body">
+        <p ng-if="statusService == 1">Bạn có chắc chắn muốn ngừng hoạt động?</p>
+        <p ng-if="statusService == 0">Bạn có chắc chắn muốn hoạt động?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-success-modal" data-dismiss="modal">Không</button>
+        <button type="button" ng-click="approvalStatus(idService)" class="btn btn-default btn-err-modal"
+                style="margin: 0">Có
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

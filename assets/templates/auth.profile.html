@@ -1,0 +1,98 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>{{title}}</h3>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="row">
+  <!-- left column -->
+  <div class="x_panel" style="padding-top: 30px">
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <div class="text-center">
+        <img class="img-responsive" ng-if="account.avatar != '' && account.avatar != null" ng-src="{{image.src}}"
+             src="images/avatar/{{avatar}}" width="504" height="504">
+        <img class="img-responsive" ng-if="account.avatar == '' || account.avatar == null" ng-src="{{image.src}}"
+             src="images/default-avatar.png" width="504" height="504">
+        <h6>Upload a different photo...</h6>
+        <input type="file" name="myImage" image-with-preview ng-model="image" file-model="uploadFile"
+               class="text-center center-block well well-sm">
+      </div>
+    </div>
+    <!-- edit form column -->
+    <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+      <h4 style="margin-top: 0">Thông tin cá nhân</h4>
+      <form name="profileForm" method="post" class="form-horizontal form-label-left"
+            ng-submit="updateProfile()" novalidate>
+
+        <div class="form-group">
+          <label style="text-align: left" class="col-lg-12 col-sm-12 col-md-12 col-xs-12 control-label" for="username">Tên
+            đăng nhập:</label>
+          <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+            <input readonly class="form-control" ng-model="account.username" value="dodo94" id="username" type="text">
+          </div>
+        </div>
+
+        <div class="form-group"
+             ng-class="{ 'has-error':profileForm.full_name.$touched && profileForm.full_name.$invalid }">
+          <label style="text-align: left" class="col-lg-12 col-sm-12 col-md-12 col-xs-12 control-label" for="full_name">Họ
+            và tên <span class="required">*</span></label>
+          <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+            <input class="form-control" id="full_name" name="full_name" type="text" ng-maxlength="150"
+                   ng-model="account.fullName" required
+                   ng-pattern="/^[^\-\!\[\]\{\}&#34;\'\>\<\%\^\*\?\/\\\|\,\;\:\+\=\(\)\@\$\&\!\.\#\_]*$/">
+            <div class="help-block" ng-messages="profileForm.full_name.$error"
+                 ng-if="profileForm.full_name.$touched">
+              <p ng-message="required">Vui lòng nhập họ và tên!</p>
+              <p ng-message="maxlength">Họ và tên không được quá 150 ký tự!</p>
+              <p ng-message="pattern">Họ tên không chứa ký tự đặc biệt!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group"
+             ng-class="{ 'has-error':profileForm.email.$touched && profileForm.email.$invalid }">
+          <label style="text-align: left" class="control-label col-lg-12 col-sm-12 col-md-12 col-xs-12" for="email">Email
+            <span class="required">*</span>
+          </label>
+          <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+            <input type="email" ng-pattern="/^[a-z0-9]+[a-z0-9._]+@[a-z]+\.[a-z.]{1,10}$/"
+                   class="form-control col-md-7 col-xs-12" name="email" id="email" ng-model="account.email" required>
+            <div class="help-block" ng-messages="profileForm.email.$error" ng-if="profileForm.email.$touched">
+              <p ng-message="required">Vui lòng nhập email!</p>
+              <p ng-message="pattern">Email không đúng định dạng!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group"
+             ng-class="{ 'has-error':profileForm.phone_number.$touched && profileForm.phone_number.$invalid }">
+          <label style="text-align: left" class="control-label col-lg-12 col-sm-12 col-md-12 col-xs-12"
+                 for="phone_number">Số điện thoại <span class="required">*</span>
+          </label>
+          <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+            <input type="text" ng-maxlength="12" ng-pattern="/^(0|84)(1[2689]|9|8)[0-9]{8}$/"
+                   class="form-control col-md-7 col-xs-12" name="phone_number" ng-model="account.phoneNumber"
+                   id="phone_number" required>
+            <div class="help-block" ng-messages="profileForm.phone_number.$error"
+                 ng-if="profileForm.phone_number.$touched">
+              <p ng-message="required">Vui lòng nhập số điện thoại!</p>
+              <p ng-message="pattern">Số điện thoại không đúng định dạng!</p>
+              <p ng-message="maxlength">Số điện thoại không được dài hơn 12 ký tự số!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-12 control-label"></label>
+          <div class="col-md-12">
+            <input class="btn btn-primary"
+                   ng-disabled="profileForm.$dirty && profileForm.$invalid" value="Cập nhật"
+                   type="submit">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

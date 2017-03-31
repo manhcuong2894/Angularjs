@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html ng-app="helpdeskApp">
+<head>
+  <title>Helpdesk Management</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <link rel="stylesheet" href="/styles/bootstrap.css">
+  <link rel="stylesheet" href="/styles/font-awesome.css">
+  <link rel="stylesheet" href="/styles/select2.min.css">
+  <link rel="stylesheet" href="/styles/importer.css">
+  <link rel="stylesheet" href="/styles/dist/angular-toastr.css">
+  <link rel="stylesheet" href="/styles/testtab.css">
+
+
+  <script src="/js/dependencies/dist/jquery.js"></script>
+  <script src="/js/dependencies/angular.js"></script>
+  <script src="/js/dependencies/ui-bootstrap-tpls.js"></script>
+  <script src="/js/dependencies/assets/javascripts/bootstrap.js"></script>
+  <script src="/js/dependencies/angular-animate.js"></script>
+  <script src="/js/dependencies/angular-aria.js"></script>
+  <script src="/js/dependencies/angular-cookies.js"></script>
+  <script src="/js/dependencies/angular-messages.js"></script>
+  <script src="/js/dependencies/angular-resource.js"></script>
+  <script src="/js/dependencies/angular-route.js"></script>
+  <script src="/js/dependencies/angular-sanitize.js"></script>
+  <script src="/js/dependencies/angular-touch.js"></script>
+  <script src="/js/dependencies/release/angular-ui-router.js"></script>
+  <script src="/js/dependencies/satellizer.js"></script>
+  <script src="/js/dependencies/dist/angular-local-storage.js"></script>
+  <script src="/js/dependencies/dirPagination.js"></script>
+  <script src="/js/dependencies/dist/angular-strap.js"></script>
+  <script src="/js/dependencies/dist/angular-strap.tpl.js"></script>
+  <script src="/js/dependencies/spin.js"></script>
+  <script src="/js/dependencies/angular-spinner.js"></script>
+  <script src="/js/dependencies/angular-loading-spinner.js"></script>
+  <script src="/js/dependencies/lodash.js"></script>
+  <script src="/js/dependencies/dist/restangular.js"></script>
+  <script src="/js/dependencies/moment.js"></script>
+  <script src="/js/dependencies/angular-moment.js"></script>
+  <script src="/js/dependencies/dist/angular-toastr.tpls.js"></script>
+  <script src="/js/dependencies/dist/js/select2.js"></script>
+  <script type="text/javascript" src='/js/dependencies/dist/ng-image-input-with-preview.js'></script>
+  <!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>-->
+
+  <!--Core function-->
+  <script src="/js/core/app.js"></script>
+  <script src="/js/core/app.router.js"></script>
+  <script src="/js/core/app.restrict.js"></script>
+
+  <!--Auth-->
+  <script src="/js/controllers/auth/login.js"></script>
+  <script src="/js/controllers/auth/auth.js"></script>
+  <script src="/js/controllers/auth/changepassword.js"></script>
+  <script src="/js/controllers/auth/logout.js"></script>
+  <script src="/js/controllers/auth/profile.js"></script>
+
+  <!--Layout-->
+  <script src="/js/controllers/site.js"></script>
+
+  <!--Home-->
+  <script src="/js/controllers/home.js"></script>
+
+  <!--Contact-->
+  <!--<script src="/js/controllers/contact.js"></script>-->
+
+  <!--Account-->
+  <script src="/js/controllers/account/account.js"></script>
+  <script src="/js/controllers/account/account.list.js"></script>
+  <script src="/js/controllers/account/account.edit.js"></script>
+  <script src="/js/controllers/account/account.reset.js"></script>
+  <script src="/js/controllers/account/account.add.js"></script>
+  <script src="/js/controllers/account/account.delete.js"></script>
+
+  <!-- Right -->
+  <script src="/js/controllers/right/right.js"></script>
+  <script src="/js/controllers/right/right.list.js"></script>
+  <script src="/js/controllers/right/right.add.js"></script>
+  <script src="/js/controllers/right/right.edit.js"></script>
+  <script src="/js/controllers/right/right.detail.js"></script>
+  <script src="/js/controllers/right/right.delete.js"></script>
+
+  <!--Service-->
+  <script src="/js/controllers/service/service.js"></script>
+  <script src="/js/controllers/service/service.list.js"></script>
+  <script src="/js/controllers/service/service.add.js"></script>
+  <script src="/js/controllers/service/service.edit.js"></script>
+
+  <!--Document-->
+  <script src="/js/controllers/document/document.js"></script>
+  <script src="/js/controllers/document/document.list.js"></script>
+  <script src="/js/controllers/document/document.add.js"></script>
+
+  <!--Request-->
+  <script src="/js/controllers/request/request.js"></script>
+  <script src="/js/controllers/request/request.list.js"></script>
+  <script src="/js/controllers/request/request.add.js"></script>
+  <script src="/js/controllers/request/request.edit.js"></script>
+  <script src="/js/controllers/request/request.delete.js"></script>
+  <script src="/js/controllers/request/request.detail.js"></script>
+  <script src="/js/controllers/request/request.check.js"></script>
+  <script src="/js/controllers/request/request.reopen.js"></script>
+  <script src="/js/controllers/request/request.history.js"></script>
+
+  <!--MyRequest-->
+  <script src="/js/controllers/myrequest/myrequest.js"></script>
+  <script src="/js/controllers/myrequest/myrequest.list.js"></script>
+
+  <!--Report-->
+  <script src="/js/controllers/report/report.js"></script>
+  <script src="/js/controllers/report/report.detail.js"></script>
+  <script src="/js/controllers/report/report.general.js"></script>
+  <script src="/js/controllers/report/report.requestoutofdate.js"></script>
+  <script src="/js/controllers/report/report.requestnothandling.js"></script>
+
+  <!-- Test Tabs -->
+  <script src="/js/controllers/test/test.js"></script>
+  <script src="/js/controllers/test/test.tab.js"></script>
+
+  <!--Directives-->
+  <script src="/js/directives/cancelButton.js"></script>
+  <script src="/js/directives/fileModel.js"></script>
+  <script src="/js/directives/fileModel1.js"></script>
+  <script src="/js/directives/testTab.js"></script>
+
+  <!--Services function-->
+  <script src="/js/services/portalConfig.js"></script>
+  <script src="/js/services/resangularConfig.js"></script>
+  <script src="/js/services/authorization.js"></script>
+  <script src="/js/services/flash-message.js"></script>
+  <script src="/js/services/principal.js"></script>
+
+  <script src="/js/services/account.js"></script>
+  <script src="/js/services/accountConfig.js"></script>
+
+  <script src="/js/services/right.js"></script>
+  <script src="/js/services/rightConfig.js"></script>
+
+  <script src="/js/services/service.js"></script>
+  <script src="/js/services/serviceConfig.js"></script>
+
+  <script src="/js/services/request.js"></script>
+  <script src="/js/services/requestConfig.js"></script>
+
+  <script src="/js/services/document.js"></script>
+  <script src="/js/services/myRequest.js"></script>
+
+  <script src="/js/services/handling.js"></script>
+
+  <script src="/js/services/report.js"></script>
+
+  <script src="/js/services/yearConfig.js"></script>
+
+  <script src="/js/services/test.js"></script>
+
+</head>
+<body class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+
+      <div ui-view></div>
+
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<div ui-view>
+  <div class="page-title">
+    <div class="title_left">
+      <h3>{{title}}</h3>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Tìm kiếm
+            <!--<small>different form elements</small>-->
+          </h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <form id="demo-form2" name="formDemo" method="post" class="form-horizontal form-label-left" ng-submit="save()"
+                novalidate>
+
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="user_name" class="control-label" style="padding: 0">Tên đăng nhập</label>
+                  <input type="text" class="form-control" id="user_name" ng-model="account.TenDangNhap">
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="email" class="control-label" style="padding: 0">Email</label>
+                  <input type="text" class="form-control" id="email" ng-model="account.Email">
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="role" class="control-label" style="padding: 0">Phân quyền</label>
+
+                  <select class="form-control" name="role" id="role" ng-model="account.IDNhomQuyen">
+                    <option value="">- Tất cả -</option>
+                    <option ng-repeat="right in rights" value="{{right.ID}}">{{right.TenNhom}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="status" class="control-label" style="padding: 0">Trạng thái</label>
+                  <select class="form-control" name="status" id="status" ng-model="account.TrangThai">
+                    <option value="">- Tất cả -</option>
+                    <option value="1">Hoạt động</option>
+                    <option value="0">Ngừng hoạt động</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-md-12" style="margin-top: 10px !important;">
+                <a class="btn btn-success pull-right btn-search" ui-sref="account.add">Thêm mới</a>
+                <input type="submit" class="btn btn-primary pull-right btn-search" value="Tìm kiếm" style="margin-right: 10px;"/>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Danh sách người dùng
+            <small>Tổng số thành viên: 10</small>
+          </h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+
+          <!--<p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p>-->
+
+          <div id="no-more-tables" class="table-responsive">
+            <table class="table table-striped jambo_table bulk_action table-bordered">
+              <thead>
+              <tr class="headings">
+                <th class="column-title">STT</th>
+                <th class="column-title">Tên đăng nhập</th>
+                <th class="column-title">Họ tên</th>
+                <th class="column-title">Email</th>
+                <th class="column-title">Phân quyền</th>
+                <th class="column-title">Người tạo</th>
+                <th class="column-title">Trạng thái</th>
+                <th class="column-title no-link last"><span class="nobr">Hành động</span>
+                </th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr class="even pointer">
+                <td data-title="STT" class="a-center ">1</td>
+                <td data-title="Tên đăng nhập">121000040</td>
+                <td data-title="Họ tên">May 23, 2014 11:47:56 PM</td>
+                <td data-title="Email">121000210 <i class="success fa fa-long-arrow-up"></i></td>
+                <td data-title="Phân quyền">John Blank L</td>
+                <td data-title="Người tạo">Paid</td>
+                <td data-title="Trạng thái" class="a-right a-right ">$7.45</td>
+                <td data-title="Hành động" class=" last"><a href="#">View</a>
+                </td>
+              </tr>
+              <tr class="odd pointer">
+                <td data-title="STT" class="a-center ">2</td>
+                <td data-title="Tên đăng nhập">121000040</td>
+                <td data-title="Họ tên">May 23, 2014 11:47:56 PM</td>
+                <td data-title="Email">121000210 <i class="success fa fa-long-arrow-up"></i></td>
+                <td data-title="Phân quyền">John Blank L</td>
+                <td data-title="Người tạo">Paid</td>
+                <td data-title="Trạng thái" class="a-right a-right ">$7.45</td>
+                <td data-title="Hành động" class=" last"><a href="#">View</a>
+                </td>
+              </tr>
+              <tr class="even pointer">
+                <td data-title="STT" class="a-center ">3</td>
+                <td data-title="Tên đăng nhập">121000040</td>
+                <td data-title="Họ tên">May 23, 2014 11:47:56 PM</td>
+                <td data-title="Email">121000210 <i class="success fa fa-long-arrow-up"></i></td>
+                <td data-title="Phân quyền">John Blank L</td>
+                <td data-title="Người tạo">Paid</td>
+                <td data-title="Trạng thái" class="a-right a-right ">$7.45</td>
+                <td data-title="Hành động" class=" last"><a href="#">View</a>
+                </td>
+              </tr>
+              <tr class="odd pointer">
+                <td data-title="STT" class="a-center ">4</td>
+                <td data-title="Tên đăng nhập">121000040</td>
+                <td data-title="Họ tên">May 23, 2014 11:47:56 PM</td>
+                <td data-title="Email">121000210 <i class="success fa fa-long-arrow-up"></i></td>
+                <td data-title="Phân quyền">John Blank L</td>
+                <td data-title="Người tạo">Paid</td>
+                <td data-title="Trạng thái" class="a-right a-right ">$7.45</td>
+                <td data-title="Hành động" class=" last"><a href="#">View</a>
+                </td>
+              </tr>
+              <tr class="even pointer">
+                <td data-title="STT" class="a-center ">5</td>
+                <td data-title="Tên đăng nhập">121000040</td>
+                <td data-title="Họ tên">May 23, 2014 11:47:56 PM</td>
+                <td data-title="Email">121000210 <i class="success fa fa-long-arrow-up"></i></td>
+                <td data-title="Phân quyền">John Blank L</td>
+                <td data-title="Người tạo">Paid</td>
+                <td data-title="Trạng thái" class="a-right a-right ">$7.45</td>
+                <td data-title="Hành động" class=" last"><a href="#">View</a>
+                </td>
+              </tr>
+              <tr class="even pointer">
+                <td data-title="STT" class="a-center ">6</td>
+                <td data-title="Tên đăng nhập">121000040</td>
+                <td data-title="Họ tên">May 23, 2014 11:47:56 PM</td>
+                <td data-title="Email">121000210 <i class="success fa fa-long-arrow-up"></i></td>
+                <td data-title="Phân quyền">John Blank L</td>
+                <td data-title="Người tạo">Paid</td>
+                <td data-title="Trạng thái" class="a-right a-right ">$7.45</td>
+                <td data-title="Hành động" class=" last"><a href="#">View</a>
+                </td>
+              </tr>
+              <tr class="odd pointer">
+                <td data-title="STT" class="a-center ">7</td>
+                <td data-title="Tên đăng nhập">121000040</td>
+                <td data-title="Họ tên">May 23, 2014 11:47:56 PM</td>
+                <td data-title="Email">121000210 <i class="success fa fa-long-arrow-up"></i></td>
+                <td data-title="Phân quyền">John Blank L</td>
+                <td data-title="Người tạo">Paid</td>
+                <td data-title="Trạng thái" class="a-right a-right ">$7.45</td>
+                <td data-title="Hành động" class=" last"><a href="#">View</a>
+                </td>
+              </tr>
+              <tr class="even pointer">
+                <td data-title="STT" class="a-center ">8</td>
+                <td data-title="Tên đăng nhập">121000040</td>
+                <td data-title="Họ tên">May 23, 2014 11:47:56 PM</td>
+                <td data-title="Email">121000210 <i class="success fa fa-long-arrow-up"></i></td>
+                <td data-title="Phân quyền">John Blank L</td>
+                <td data-title="Người tạo">Paid</td>
+                <td data-title="Trạng thái" class="a-right a-right ">$7.45</td>
+                <td data-title="Hành động" class=" last"><a href="#">View</a>
+                </td>
+              </tr>
+              <tr class="odd pointer">
+                <td data-title="STT" class="a-center ">9</td>
+                <td data-title="Tên đăng nhập">121000040</td>
+                <td data-title="Họ tên">May 23, 2014 11:47:56 PM</td>
+                <td data-title="Email">121000210 <i class="success fa fa-long-arrow-up"></i></td>
+                <td data-title="Phân quyền">John Blank L</td>
+                <td data-title="Người tạo">Paid</td>
+                <td data-title="Trạng thái" class="a-right a-right ">$7.45</td>
+                <td data-title="Hành động" class=" last"><a href="#">View</a>
+                </td>
+              </tr>
+              <tr class="even pointer">
+                <td data-title="STT" class="a-center ">10</td>
+                <td data-title="Tên đăng nhập">121000040</td>
+                <td data-title="Họ tên">May 23, 2014 11:47:56 PM</td>
+                <td data-title="Email">121000210 <i class="success fa fa-long-arrow-up"></i></td>
+                <td data-title="Phân quyền">John Blank L</td>
+                <td data-title="Người tạo">Paid</td>
+                <td data-title="Trạng thái" class="a-right a-right ">$7.45</td>
+                <td data-title="Hành động" class=" last"><a href="#">View</a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

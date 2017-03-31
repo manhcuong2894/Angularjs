@@ -1,0 +1,61 @@
+{
+  "name": "helpdesk",
+  "description": "helpdesk is a management system of ATK",
+  "main": "app.js",
+  "dependencies": {
+    "angular": "^1.4.0",
+    "bootstrap-sass-official": "^3.2.0",
+    "angular-animate": "^1.4.0",
+    "angular-aria": "^1.4.0",
+    "angular-cookies": "^1.4.0",
+    "angular-messages": "^1.4.0",
+    "angular-resource": "^1.4.0",
+    "angular-route": "^1.4.0",
+    "angular-sanitize": "^1.4.0",
+    "angular-touch": "^1.4.0",
+    "angular-ui-router": "^0.2.15",
+    "satellizer": "~0.13.0",
+    "angular-local-storage": "^0.2.3",
+    "angular-utils-pagination": "",
+    "angular-strap": "~2.2.1",
+    "angular-spinner": "~0.6.1",
+    "angular-loading-spinner": "~0.0.3",
+    "restangular": "~1.5.1",
+    "angular-moment": "~0.10.3",
+    "moment": "~2.10.6",
+    "font-awesome": "~4.7.0",
+    "angular-toastr": "^2.1.1",
+    "select2": "^4.0.2",
+    "ng-image-input-with-preview": "^0.0.6"
+  },
+  "authors": [
+    "dodo94"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "helpdesk"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    },
+    "font-awesome": {
+      "main": [
+        "less/font-awesome.less",
+        "css/font-awesome.css"
+      ]
+    }
+  }
+}

@@ -1,0 +1,150 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>{{title}}</h3>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Tìm kiếm
+          <!--<small>different form elements</small>-->
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <form id="demo-form2" name="formDemo" method="post" class="form-horizontal form-label-left" novalidate>
+
+          <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="handler_group_id" class="control-label" style="padding: 0">Nhóm xử lý</label>
+                <select class="select2_multiple form-control" name="handler_group_id" id="handler_group_id"
+                        ng-model="reportOutOfDate.handler_group_id" multiple="multiple">
+                  <option ng-repeat="rightGroup in rightGroups" value="{{rightGroup.id}}">{{rightGroup.groupName}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="start_date" class="control-label" style="padding: 0">Từ ngày</label>
+
+                <div class="input-group">
+                  <input type="text" id="start_date" class="form-control" ng-model="reportOutOfDate.start_date"
+                         bs-datepicker autoclose="true" placeholder="dd/MM/yyyy"
+                         data-model-date-format="dd/MM/yyyy" data-date-format="dd/MM/yyyy"
+                         date-type="string"/>
+                  <span class="input-group-btn">
+                        <label class="btn btn-default" style="margin-right: 0" for="start_date"><i
+                          class="glyphicon glyphicon-calendar"></i></label>
+                      </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="end_date" class="control-label" style="padding: 0">Đến ngày</label>
+                <div class="input-group">
+                  <input type="text" id="end_date" class="form-control" ng-model="reportOutOfDate.end_date"
+                         bs-datepicker autoclose="true" placeholder="dd/MM/yyyy"
+                         data-model-date-format="dd/MM/yyyy" data-date-format="dd/MM/yyyy"
+                         date-type="string"/>
+                  <span class="input-group-btn">
+                        <label class="btn btn-default" style="margin-right: 0" for="end_date"><i
+                          class="glyphicon glyphicon-calendar"></i></label>
+                      </span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 pull-right">
+              <div class="form-group" style="margin-top: 5px; margin-bottom: 0">
+                <label class="control-label" style="padding: 0">&#32;</label>
+                <a ng-click="exportReportOutOfDate()" class="btn btn-success pull-right btn-search" style="margin-right: 0;"><i
+                  class="fa fa-download"></i> Xuất excel</a>
+                <button ng-click="getReportOutOfDate()" class="btn btn-primary pull-right btn-search"><i
+                  class="fa fa-search"></i> Tìm kiếm
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Danh sách báo cáo các yêu cầu quá hạn</h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="x_content">
+        <div id="no-more-tables" class="table-responsive">
+
+          <table class="table table-striped jambo_table bulk_action table-bordered request-table" ng-if="noData == 0">
+            <thead>
+            <tr class="headings">
+              <th class="column-title">Người xử lý</th>
+              <th class="column-title">Đang xử lý</th>
+              <th class="column-title">Chưa xử lý</th>
+              <th class="column-title">Tổng</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+              <td colspan="4" style="text-align: center">Không tìm thấy kết quả theo yêu cầu!</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <table class="table tr-last table-striped jambo_table bulk_action table-bordered request-table" ng-if="noData == 1">
+            <thead>
+            <tr class="headings">
+              <th class="column-title">Người xử lý</th>
+              <th class="column-title">Đang xử lý</th>
+              <th class="column-title">Chưa xử lý</th>
+              <th class="column-title">Tổng</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr class="even pointer" ng-repeat="reportOut in reportOuts">
+              <td data-title="Người xử lý" class="a-center ">{{reportOut.TenDayDu}}</td>
+              <td data-title="Đang xử lý">{{reportOut.DangXuLy}}</td>
+              <td data-title="Chưa xử lý">{{reportOut.ChuaXuLy}}</td>
+              <td data-title="Tổng">{{reportOut.Tong}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

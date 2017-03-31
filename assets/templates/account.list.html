@@ -1,0 +1,205 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>{{title}}</h3>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Tìm kiếm
+          <!--<small>different form elements</small>-->
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <form id="demo-form2" name="formDemo" method="post" class="form-horizontal form-label-left" novalidate>
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="user_name" class="control-label" style="padding: 0">Tên đăng nhập</label>
+                <input type="text" class="form-control" id="user_name" ng-model="account.username">
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="email" class="control-label" style="padding: 0">Email</label>
+                <input type="text" class="form-control" id="email" ng-model="account.email">
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="role" class="control-label" style="padding: 0">Phân quyền</label>
+
+                <select class="form-control" name="role" id="role" ng-model="account.roleId">
+                  <option value="">- Tất cả -</option>
+                  <option ng-repeat="right in rights" value="{{right.id}}">{{right.groupName}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="status" class="control-label" style="padding: 0">Trạng thái</label>
+                <select class="form-control" name="status" id="status" ng-model="account.status">
+                  <option value="">-Tất cả-</option>
+                  <option value="1">Hoạt động</option>
+                  <option value="0">Ngừng hoạt động</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-12" style="margin-top: 5px">
+              <a ng-if="checkRight(19)" ui-sref="account.add" style="margin-right: 0" class="btn btn-success pull-right btn-search"><i
+                class="fa fa-plus"></i> Thêm mới</a>
+              <button ng-click="getAccount(1)" class="btn btn-primary pull-right btn-search"><i
+                class="fa fa-search"></i> Tìm kiếm
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Danh sách người dùng
+          <small>Tổng số thành viên: {{totalAccount}}</small>
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="x_content">
+
+        <!--<p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p>-->
+
+        <div id="no-more-tables" class="table-responsive">
+          <table class="table table-striped jambo_table bulk_action table-bordered" ng-if="noData == 0">
+            <thead>
+            <tr class="headings">
+              <th class="column-title">STT</th>
+              <th class="column-title">Tên đăng nhập</th>
+              <th class="column-title">Họ tên</th>
+              <th class="column-title">Email</th>
+              <th class="column-title">Phân quyền</th>
+              <th class="column-title">Người tạo</th>
+              <th class="column-title">Trạng thái</th>
+              <th class="column-title no-link last"><span class="nobr">Hành động</span>
+              </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+              <td colspan="8" style="text-align: center">Không tìm thấy kết quả theo yêu cầu!</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <table class="table table-striped jambo_table bulk_action table-bordered" ng-if="noData == 1">
+            <thead>
+            <tr class="headings">
+              <th class="column-title">STT</th>
+              <th class="column-title">Tên đăng nhập</th>
+              <th class="column-title">Họ tên</th>
+              <th class="column-title">Email</th>
+              <th class="column-title">Phân quyền</th>
+              <th class="column-title">Người tạo</th>
+              <th class="column-title">Trạng thái</th>
+              <th class="column-title no-link last"><span class="nobr">Hành động</span>
+              </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr class="even pointer" dir-paginate="account in accounts | itemsPerPage: accountPerPage"
+                total-items="totalAccount"
+                current-page="pagination.current">
+              <td data-title="STT" class="a-center ">{{$index + 1}}</td>
+              <td data-title="Tên đăng nhập">{{account.username}}</td>
+              <td data-title="Họ tên">{{account.fullName}}</td>
+              <td data-title="Email">{{account.email}}</td>
+              <td data-title="Phân quyền">{{account.roleId.groupName}}</td>
+              <td data-title="Người tạo">{{account.createBy}}</td>
+              <td data-title="Trạng thái" class="a-right a-right ">{{getStatusLabel(account.status)}}</td>
+              <td data-title="Hành động" class=" last">
+                <a class="btn" ui-sref="account.edit({id:account.id})" ng-if="checkRight(20)"><i title="Sửa thông tin tài khoản"
+                                                                          class="fa fa-pencil-square-o"
+                                                                          aria-hidden="true"></i></a>
+                <a ng-if="account.status == 1 && checkRight(20)" class="btn" data-placement="top" title="Trạng thái hoạt động"
+                   data-toggle="modal"
+                   ng-click="getInfo(account.id, account.status)" data-target=".bs-example-modal-sm"><i
+                  class="fa fa-check"
+                  aria-hidden="true"></i></a>
+                <a ng-if="account.status == 0 && checkRight(20)" class="btn" style="color: red" data-placement="top"
+                   title="Trạng thái ngừng hoạt động" data-toggle="modal"
+                   ng-click="getInfo(account.id, account.status)" data-target=".bs-example-modal-sm"><i
+                  class="fa fa-times"
+                  aria-hidden="true"></i></a>
+                <a class="btn" ui-sref="account.reset({id:account.id})" ng-if="checkRight(22)"><i title="Reset mật khẩu" class="fa fa-refresh"
+                                                                           aria-hidden="true"></i></a>
+                <a class="btn" ui-sref="account.delete({id:account.id})" ng-if="checkRight(21)"><i title="Xóa thông tin tài khoản"
+                                                                            class="fa fa-trash-o"
+                                                                            aria-hidden="true"></i></a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <dir-pagination-controls ng-if="noData == 1" on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal cập nhật trạng thái -->
+<div class="modal fade bs-example-modal-sm" id="confirm_account" tabindex="-1" role="dialog"
+     aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Thông báo</h4>
+      </div>
+
+      <div class="modal-body">
+        <p ng-if="statusAccount == 1">Bạn có chắc chắn muốn ngừng hoạt động?</p>
+        <p ng-if="statusAccount == 0">Bạn có chắc chắn muốn hoạt động?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-success-modal" data-dismiss="modal">Không</button>
+        <button type="button" ng-click="approvalStatus(idAccount)" class="btn btn-default btn-err-modal"
+                style="margin: 0">Có
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

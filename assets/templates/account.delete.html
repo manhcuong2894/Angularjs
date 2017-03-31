@@ -1,0 +1,112 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>{{title}}</h3>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Xóa thông tin tài khoản
+          <!--<small>different form elements</small>-->
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <form id="demo-form2" name="accountDeleteForm" method="post"
+              class="form-horizontal form-detail form-label-left">
+
+          <div class="form-group">
+            <label class="control-label col-md-4 col-sm-4 col-xs-6" for="user_name">Tên đăng nhập :</label>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+              <label class="col-md-7 col-xs-12" id="user_name">{{account.username}}</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-4 col-sm-4 col-xs-6" for="full_name">Họ và tên :</label>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+              <label class="col-md-7 col-xs-12" id="full_name">{{account.fullName}}</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-4 col-sm-4 col-xs-6" for="email">Email :</label>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+              <label class="col-md-7 col-xs-12" id="email">{{account.email}}</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-4 col-sm-4 col-xs-6" for="phone">Số điện thoại :</label>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+              <label class="col-md-7 col-xs-12" id="phone">{{account.phoneNumber}}</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-4 col-sm-4 col-xs-6" for="role">Phân quyền :</label>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+              <label class="col-md-7 col-xs-12" id="role">{{account.roleId.groupName}}</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-4 col-sm-4 col-xs-6" for="manager">Quản lý :</label>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+              <label class="col-md-7 col-xs-12" id="manager">{{getManagerLabel(account.manager)}}</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-4 col-sm-4 col-xs-6" for="status">Trạng thái :</label>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+              <label class="col-md-7 col-xs-12" id="status">{{getStatusLabel(account.status)}}</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-4 col-sm-4 col-xs-6" for="create_at">Ngày tạo :</label>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+              <label class="col-md-7 col-xs-12" id="create_at">{{account.createAt | date : "dd/MM/yyyy
+                HH:mm:ss"}}</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-4 col-sm-4 col-xs-6" for="edit_at">Ngày sửa :</label>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+              <label class="col-md-7 col-xs-12" id="edit_at">{{account.editedAt | date : "dd/MM/yyyy HH:mm:ss"}}</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-4 col-sm-4 col-xs-6">Avatar :</label>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+              <img style="width: 30%; margin-top: 5px;" ng-if="account.avatar != '' && account.avatar != null" ng-src="{{image.src}}"  src="images/avatar/{{avatar}}">
+              <img style="width: 30%; margin-top: 5px;" ng-if="account.avatar == '' || account.avatar == null" ng-src="{{image.src}}"  src="images/default-avatar.png">
+            </div>
+          </div>
+
+          <div class="ln_solid"></div>
+
+          <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-4">
+              <input type="submit" class="btn btn-success" ng-click="delAccount(account.id)" value="Xóa"/>
+              <a ui-sref="account.list" class="btn btn-danger">Hủy bỏ</a>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

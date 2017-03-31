@@ -1,0 +1,182 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>{{title}}</h3>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Xóa yêu cầu
+          <!--<small>different form elements</small>-->
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <form id="demo-form2" name="requestAddForm" class="form-horizontal form-add form-label-left" novalidate>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+
+              <div class="form-group">
+                <label class="control-label col-md-4 col-sm-6 col-xs-6">Mã ticket :</label>
+                <div class="col-md-8 col-sm-4 col-xs-4">
+                  <label style="margin-top: 7px;">{{detailRequests.ticketCode}}</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-4 col-sm-6 col-xs-6">Dịch vụ :</label>
+                <div class="col-md-8 col-sm-4 col-xs-4">
+                  <label style="margin-top: 7px;">{{detailRequests.service.shortName}}</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-4 col-sm-6 col-xs-6">Mức độ :</label>
+                <div class="col-md-8 col-sm-4 col-xs-4">
+                  <label style="margin-top: 7px;">{{getLevelLabel(detailRequests.level)}}</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-4 col-sm-6 col-xs-6">Kênh tiếp nhận :</label>
+                <div class="col-md-8 col-sm-4 col-xs-4">
+                  <label style="margin-top: 7px;">{{getChannelLabel(detailRequests.channel)}}</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-4 col-sm-6 col-xs-6">Thời gian :</label>
+                <div class="col-md-8 col-sm-4 col-xs-4">
+                  <label style="margin-top: 7px;">{{detailRequests.timeRequest | date : "dd/MM/yyyy HH:mm:ss"}}</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-4 col-sm-6 col-xs-6">Thông tin liên hệ :</label>
+                <div class="col-md-8 col-sm-4 col-xs-4">
+                  <label style="margin-top: 7px;">{{detailRequests.contact}}</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-4 col-sm-6 col-xs-6">Cam kết SLA :</label>
+                <div class="col-md-8 col-sm-4 col-xs-4">
+                  <label style="margin-top: 7px;">{{detailRequests.number}} <span
+                    ng-if="detailRequests.sla == 1 && detailRequests.number > 0">ngày</span> <span
+                    ng-if="detailRequests.sla == 2 && detailRequests.number > 0">Giờ</span></label>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+
+              <div class="form-group">
+                <label class="control-label col-md-4 col-sm-6 col-xs-6">Tình trạng :</label>
+                <div class="col-md-8 col-sm-4 col-xs-4">
+                  <label style="margin-top: 7px;">{{getStatusLabel(detailRequests.status)}}</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-4 col-sm-6 col-xs-6">Người xử lý :</label>
+                <div class="col-md-8 col-sm-4 col-xs-4">
+                  <label style="margin-top: 7px;">{{detailRequests.assigned.username}}</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-4 col-sm-6 col-xs-6">Người chịu TN :</label>
+                <div class="col-md-8 col-sm-4 col-xs-4">
+                  <label style="margin-top: 7px;">{{detailRequests.responsible.username}}</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-4 col-sm-6 col-xs-6">Nội dung yêu cầu :</label>
+                <div class="col-md-8 col-sm-4 col-xs-4">
+                  <label style="margin-top: 7px;">{{detailRequests.content}}</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-4 col-sm-12 col-xs-12">File đính kèm :</label>
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                  <label style="margin-top: 7px;"><a ng-click="download(detailRequests.id)"
+                                                     style="color: #2B81AF; text-decoration: underline">{{detailRequests.fileName}}</a>
+                  </label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="ln_solid"></div>
+
+          <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
+              <input type="submit" ng-click="deleteRequest()" class="btn btn-success" value="Xác nhận"/>
+              <cancel-button></cancel-button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Chi tiết
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="x_content">
+        <div id="no-more-tables" class="table-responsive">
+          <table class="table table-striped jambo_table bulk_action table-bordered request-table">
+            <thead>
+            <tr class="headings">
+              <th class="column-title">STT</th>
+              <th class="column-title">Người thực hiện</th>
+              <th class="column-title">Thao tác</th>
+              <th class="column-title">Mô tả</th>
+              <th class="column-title">Thời gian</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr class="even pointer" ng-repeat="handlingRequest in handlingRequests">
+              <td data-title="STT" class="a-center ">{{$index + 1}}</td>
+              <td data-title="Người thực hiện">{{handlingRequest.handlers.username}}</td>
+              <td data-title="Thao tác">{{getStatusLabel(handlingRequest.manipulation)}}</td>
+              <td data-title="Mô tả">{{handlingRequest.description}}</td>
+              <td data-title="Thời gian">{{handlingRequest.timeHandling | date : "dd/MM/yyyy HH:mm:ss"}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

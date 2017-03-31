@@ -1,0 +1,190 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>{{title}}</h3>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Tìm kiếm
+          <!--<small>different form elements</small>-->
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <form id="demo-form2" name="formDemo" method="post" class="form-horizontal form-label-left" novalidate>
+
+          <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="NguoiXuLy" class="control-label" style="padding: 0">Người xử lý</label>
+                <select class="select2_multiple form-control" name="NguoiXuLy" id="NguoiXuLy"
+                        ng-model="reportDetail.handler_id" multiple="multiple">
+                  <optgroup ng-repeat="rightGroup in rightGroups" label="{{rightGroup.groupName}}">
+                    <option ng-repeat="item in rightGroup.roleId_user" value="{{item.id}}">{{item.username}}</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="NguoiChiuTrachNhiem" class="control-label" style="padding: 0">Người chịu TN</label>
+                <select class="select_receiver form-control" name="NguoiChiuTrachNhiem" id="NguoiChiuTrachNhiem"
+                        ng-model="reportDetail.responsible_id" multiple="multiple">
+                  <optgroup ng-repeat="rightGroup in rightGroupByManagers" label="{{rightGroup.groupName}}">
+                    <option ng-repeat="item in rightGroup.roleId_user" value="{{item.id}}">{{item.username}}</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="status" class="control-label" style="padding: 0">Tình trạng</label>
+                <select class="form-control" name="service" id="status" ng-model="reportDetail.status">
+                  <option value="">-Tất cả-</option>
+                  <option ng-repeat="statusSearch in statusSearchs" value="{{statusSearch.value}}">
+                    {{statusSearch.label}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="start_date" class="control-label" style="padding: 0">Từ ngày</label>
+
+                <div class="input-group">
+                  <input type="text" id="start_date" class="form-control" ng-model="reportDetail.start_date"
+                         bs-datepicker autoclose="true" placeholder="dd/MM/yyyy"
+                         data-model-date-format="dd/MM/yyyy" data-date-format="dd/MM/yyyy"
+                         date-type="string"/>
+                  <span class="input-group-btn">
+                        <label class="btn btn-default" style="margin-right: 0" for="start_date"><i
+                          class="glyphicon glyphicon-calendar"></i></label>
+                      </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="end_date" class="control-label" style="padding: 0">Đến ngày</label>
+                <div class="input-group">
+                  <input type="text" id="end_date" class="form-control" ng-model="reportDetail.end_date"
+                         bs-datepicker autoclose="true" placeholder="dd/MM/yyyy"
+                         data-model-date-format="dd/MM/yyyy" data-date-format="dd/MM/yyyy"
+                         date-type="string"/>
+                  <span class="input-group-btn">
+                        <label class="btn btn-default" style="margin-right: 0" for="end_date"><i
+                          class="glyphicon glyphicon-calendar"></i></label>
+                      </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group" style="margin-top: 16px;">
+                <label class="control-label" style="padding: 0">&#32;</label>
+                <a ng-click="exportReportDetail()" class="btn btn-success pull-right btn-search"><i
+                  class="fa fa-download"></i> Xuất excel</a>
+                <button ng-click="getReportDetail()" class="btn btn-primary pull-right btn-search"><i
+                  class="fa fa-search"></i> Tìm kiếm
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Danh sách báo cáo chi tiết</h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="x_content">
+        <div id="no-more-tables" class="table-responsive">
+
+          <table class="table table-striped jambo_table bulk_action table-bordered request-table" ng-if="noData == 0">
+            <thead>
+            <tr class="headings">
+              <th class="column-title">STT</th>
+              <th class="column-title">Ngày tạo yêu cầu</th>
+              <th class="column-title">Thông tin liên hệ</th>
+              <th class="column-title">Người xử lý</th>
+              <th class="column-title">Người chịu TN</th>
+              <th class="column-title">Tình trạng</th>
+              <th class="column-title">Ngày cập nhật</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+              <td colspan="7" style="text-align: center">Không tìm thấy kết quả theo yêu cầu!</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <table class="table table-striped jambo_table bulk_action table-bordered request-table" ng-if="noData == 1">
+            <thead>
+            <tr class="headings">
+              <th class="column-title">STT</th>
+              <th class="column-title">Ngày tạo yêu cầu</th>
+              <th class="column-title">Thông tin liên hệ</th>
+              <th class="column-title">Người xử lý</th>
+              <th class="column-title">Người chịu TN</th>
+              <th class="column-title">Tình trạng</th>
+              <th class="column-title">Ngày cập nhật</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr class="even pointer"
+                dir-paginate="reportDetail in reportDetails | itemsPerPage: reportDetailPerPage"
+                total-items="totalReportDetail"
+                current-page="pagination.current">
+              <td data-title="STT" class="a-center ">{{$index + 1}}</td>
+              <td data-title="Ngày tạo khiếu nại">{{reportDetail.NgayTaoKieuNai}}</td>
+              <td data-title="Thông tin liên hệ">{{reportDetail.ThongTinLienHe}}</td>
+              <td data-title="Người xử lý">{{reportDetail.NguoiXuLy}}</td>
+              <td data-title="Người chịu TN">{{reportDetail.NguoiChiuTrachNhiem}}</td>
+              <td data-title="Tình trạng">{{reportDetail.TinhTrang}}</td>
+              <td data-title="Ngày cập nhật">{{reportDetail.NgayCapNhat}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <dir-pagination-controls ng-if="noData == 1" on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

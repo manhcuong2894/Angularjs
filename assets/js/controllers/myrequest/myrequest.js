@@ -1,0 +1,2 @@
++App.controller('MyRequestCtrl', function() {
+});

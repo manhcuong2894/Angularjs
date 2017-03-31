@@ -1,0 +1,211 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>{{title}}</h3>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Tìm kiếm
+          <!--<small>different form elements</small>-->
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <form id="demo-form2" name="formDemo" method="post" class="form-horizontal form-label-left" novalidate>
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="user_name" class="control-label" style="padding: 0">Tên file</label>
+                <input type="text" class="form-control" id="user_name" ng-model="document.file_name">
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="service" class="control-label" style="padding: 0">Dịch vụ</label>
+                <select class="form-control" name="service" id="service" ng-model="document.service_id">
+                  <option value="">-Tất cả-</option>
+                  <option ng-repeat="service in services" value="{{service.id}}">{{service.shortName}}</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="TuNgay" class="control-label" style="padding: 0">Từ ngày</label>
+
+                <div class="input-group">
+                  <input type="text" id="TuNgay" class="form-control" ng-model="document.start_date"
+                         bs-datepicker autoclose="true" placeholder="dd/MM/yyyy"
+                         data-model-date-format="dd/MM/yyyy" data-date-format="dd/MM/yyyy"
+                         date-type="string"/>
+                  <span class="input-group-btn">
+                        <label class="btn btn-default" style="margin-right: 0" for="TuNgay"><i
+                          class="glyphicon glyphicon-calendar"></i></label>
+                      </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="DenNgay" class="control-label" style="padding: 0">Đến ngày</label>
+                <div class="input-group">
+                  <input type="text" id="DenNgay" class="form-control" ng-model="document.end_date"
+                         bs-datepicker autoclose="true" placeholder="dd/MM/yyyy"
+                         data-model-date-format="dd/MM/yyyy" data-date-format="dd/MM/yyyy"
+                         date-type="string"/>
+                  <span class="input-group-btn">
+                        <label class="btn btn-default" style="margin-right: 0" for="DenNgay"><i
+                          class="glyphicon glyphicon-calendar"></i></label>
+                      </span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <button ng-click="getDocument(1)" style="margin-right: 0" class="btn btn-primary pull-right btn-search"><i
+                class="fa fa-search"></i> Tìm kiếm
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Danh sách tài liệu</h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="row" style="margin-bottom: 5px; padding: 0 5px">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="record" class="control-label" style="padding: 8px 10px 0 0; margin-bottom: 0; float: left">Số
+              bản ghi: </label>
+            <div class="col-sm-6" style="padding: 0; width: 80px">
+              <select class="form-control" id="record" ng-model="documentPerPage">
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="x_content">
+        <div id="no-more-tables" class="table-responsive">
+          <table class="table table-striped jambo_table bulk_action table-bordered" ng-if="noData == 0">
+            <thead>
+            <tr class="headings">
+              <th class="column-title">STT</th>
+              <th class="column-title">Dịch vụ</th>
+              <th class="column-title">Tên file</th>
+              <th class="column-title">Ghi chú upload</th>
+              <th class="column-title">Người upload</th>
+              <th class="column-title">Ngày upload</th>
+              <th class="column-title no-link last"><span class="nobr">Hành động</span>
+              </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+              <td colspan="7" style="text-align: center">Không tìm thấy kết quả theo yêu cầu!</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <table class="table table-striped jambo_table bulk_action table-bordered" ng-if="noData == 1">
+            <thead>
+            <tr class="headings">
+              <th class="column-title">STT</th>
+              <th class="column-title">Dịch vụ</th>
+              <th class="column-title">Tên file</th>
+              <th class="column-title">Ghi chú upload</th>
+              <th class="column-title">Người upload</th>
+              <th class="column-title">Ngày upload</th>
+              <th class="column-title no-link last"><span class="nobr">Hành động</span>
+              </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr class="even pointer" dir-paginate="doc in documents | itemsPerPage: documentPerPage"
+                total-items="totalDocument"
+                current-page="pagination.current">
+              <td data-title="STT" class="a-center ">{{$index + 1}}</td>
+              <td data-title="Dịch vụ">{{doc.DichVu}}</td>
+              <td data-title="Tên file">{{doc.FileName}}</td>
+              <td data-title="Ghi chú upload">{{doc.MoTa}}</td>
+              <td data-title="Người upload">{{doc.NguoiUpload}}</td>
+              <td data-title="Ngày upload">{{doc.NgayUpload}}</td>
+              <td data-title="Hành động" class=" last">
+                <a class="btn" ng-click="download(doc.ID)"><i title="Tải xuống tài liệu" class="fa fa-download"
+                                                              aria-hidden="true"></i></a>
+                <a class="btn" data-placement="top" ng-click="getInfo(doc.ID)" ng-if="checkUser(doc.IDNguoiUpload)" title="Xóa tài liệu" data-toggle="modal"
+                   data-target=".bs-example-modal-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <dir-pagination-controls ng-if="noData == 1" on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal cập nhật trạng thái -->
+<div class="modal fade bs-example-modal-sm" id="confirm_account" tabindex="-1" role="dialog"
+     aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Thông báo</h4>
+      </div>
+
+      <div class="modal-body">
+        <p>Bạn có chắc chắn muốn xóa tài liệu này?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-success-modal" data-dismiss="modal">Không</button>
+        <button type="button" ng-click="delete(idDoccument)" class="btn btn-default btn-err-modal" style="margin: 0">
+          Có
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

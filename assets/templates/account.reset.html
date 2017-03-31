@@ -1,0 +1,89 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>{{title}}</h3>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Reset mật khẩu
+          <!--<small>different form elements</small>-->
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <form id="demo-form2" name="resetPwdForm" method="post" class="form-horizontal form-label-left"
+              ng-submit="resetPassword()"
+              novalidate>
+
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="user_name">Tên đăng nhập</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <label readonly class="form-control col-md-7 col-xs-12" id="user_name">{{account.username}}</label>
+            </div>
+          </div>
+
+          <div class="form-group"
+               ng-class="{ 'has-error':resetPwdForm.password.$touched && resetPwdForm.password.$invalid }">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Mật khẩu<span
+              class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input ng-pattern="/^[a-zA-Z0-9@$#&]*$/" ng-model="accounts.password" type="password"
+                     class="form-control col-md-7 col-xs-12" name="password" id="password" ng-minlength="6"
+                     ng-maxlength="50" ng-trim="false" required>
+              <div class="help-block" ng-messages="resetPwdForm.password.$error"
+                   ng-if="resetPwdForm.password.$touched">
+                <p ng-message="required">Vui lòng nhập mật khẩu!</p>
+                <p ng-message="minlength">Mật khẩu phải có ít nhất 6 ký tự!</p>
+                <p ng-message="maxlength">Mật khẩu không dài quá 50 ký tự!</p>
+                <p ng-message="pattern">Mật khẩu chỉ có thể chứa &#64;, &#36; &#35;, &#38;, không bao gồm khoảng trắng
+                  và ký tự Tiếng Việt!</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group"
+               ng-class="{ 'has-error':resetPwdForm.confirm_pwd.$touched && resetPwdForm.confirm_pwd.$invalid }">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="confirm_pwd">Nhập lại mật khẩu <span
+              class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input ng-pattern="{{accounts.password}}" ng-minlength="6" ng-maxlength="50" type="password"
+                     class="form-control col-md-7 col-xs-12" name="confirm_pwd" id="confirm_pwd"
+                     ng-model="accounts.confirm_password" required>
+              <div class="help-block" ng-messages="resetPwdForm.confirm_pwd.$error"
+                   ng-if="resetPwdForm.confirm_pwd.$touched">
+                <p ng-message="required">Vui lòng nhập xác nhận mật khẩu!</p>
+                <p ng-message="minlength">Xác nhận mật khẩu phải có ít nhất 6 ký tự!</p>
+                <p ng-message="maxlength">Xác nhận mật khẩu không dài quá 50 ký tự!</p>
+                <p ng-message="pattern">Giá trị xác nhận mật khẩu không trùng với mật khẩu!</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="ln_solid"></div>
+
+          <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+              <input type="submit"
+                     ng-disabled="!resetPwdForm.$dirty || (resetPwdForm.$dirty && resetPwdForm.$invalid)"
+                     class="btn btn-success" value="Cập nhật"/>
+              <a ui-sref="account.list" class="btn btn-danger">Hủy bỏ</a>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="form-group" ng-controller="TestTabCtrl">
+  <div class="tab-container">
+	  <ul class="nav nav-tabs" ng-class="{'nav-stacked': vertical, 'nav-justified': justified}">
+	  	<li ng-class="{active: active, disabled: disabled}" ng-repeat="tab in tabs" active="tab.active" tab-highlight="" class="ng-isolate-scope" style="">
+	  		<a href="" ng-click="select()" tab-heading-transclude="" class="ng-binding">
+		      <tab-heading>
+		        <span>{{tab.title}}</span> <i class="glyphicon glyphicon-remove" ng-click="removeTab($event, $index)"></i>
+		      </tab-heading>
+	      </a>
+	      <h1>{{tab.content}}</h1>
+	    </li>
+	  </ul>
+    
+    <button class="btn btn-default" ng-click="addTab()"></button>
+  </div>
+</div>

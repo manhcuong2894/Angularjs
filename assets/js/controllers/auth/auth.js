@@ -1,0 +1,2 @@
++App.controller('AuthCtrl', function() {
+});

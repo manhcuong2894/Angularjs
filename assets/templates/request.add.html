@@ -1,0 +1,242 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>{{title}}</h3>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Thêm mới yêu cầu
+          <!--<small>different form elements</small>-->
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <form id="demo-form2" name="requestAddForm" method="post" class="form-horizontal form-add form-label-left"
+              ng-submit="saveAndSendMail()" novalidate>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+
+              <div class="form-group"
+                   ng-class="{ 'has-error':requestAddForm.service.$touched && requestAddForm.service.$invalid }">
+                <label class="control-label col-md-4 col-sm-12 col-xs-12" for="service">Dịch vụ <span
+                  class="required">*</span>
+                </label>
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                  <select class="form-control" ng-options="service.id as service.shortName for service in services"
+                          ng-change="getServiceById()" id="service" name="service" ng-model="request.service"
+                          required></select>
+                  <div class="help-block" ng-messages="requestAddForm.service.$error"
+                       ng-if="requestAddForm.service.$touched">
+                    <p ng-message="required">Vui lòng chọn dịch vụ!</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group"
+                   ng-class="{ 'has-error':requestAddForm.level.$touched && requestAddForm.level.$invalid }">
+                <label class="control-label col-md-4 col-sm-12 col-xs-12" for="level">Mức độ <span
+                  class="required">*</span>
+                </label>
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                  <select class="form-control" name="level" id="level" ng-model="request.level" required>
+                    <option value="">-Tất cả-</option>
+                    <option ng-repeat="levelSearch in levelSearchs" value="{{levelSearch.value}}">
+                      {{levelSearch.label}}
+                    </option>
+                  </select>
+                  <div class="help-block" ng-messages="requestAddForm.level.$error"
+                       ng-if="requestAddForm.level.$touched">
+                    <p ng-message="required">Vui lòng chọn mức độ!</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group"
+                   ng-class="{ 'has-error':requestAddForm.chanel.$touched && requestAddForm.chanel.$invalid }">
+                <label class="control-label col-md-4 col-sm-12 col-xs-12" for="chanel">Kênh tiếp nhận <span
+                  class="required">*</span>
+                </label>
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                  <select class="form-control" name="chanel" id="chanel" ng-model="request.channel" required>
+                    <option value="">-Tất cả-</option>
+                    <option value="1">Điện thoại</option>
+                    <option value="2">Email</option>
+                  </select>
+                  <div class="help-block" ng-messages="requestAddForm.chanel.$error"
+                       ng-if="requestAddForm.chanel.$touched">
+                    <p ng-message="required">Vui lòng chọn kênh tiếp nhận!</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group"
+                   ng-class="{ 'has-error':requestAddForm.time.$touched && requestAddForm.time.$invalid }">
+                <label class="control-label col-md-4 col-sm-12 col-xs-12" for="time">Thời gian <span
+                  class="required">*</span>
+                </label>
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                  <p class="input-group">
+                    <input type="text" readonly name="time" id="time" class="form-control" ng-model="request.timeRequest"
+                           bs-datepicker autoclose="true" placeholder="dd/MM/yyyy HH:mm:ss"
+                           data-model-date-format="dd/MM/yyyy HH:mm:ss" data-date-format="dd/MM/yyyy HH:mm:ss"
+                           date-type="string" required/>
+                    <span class="input-group-btn">
+                        <label class="btn btn-default" style="margin-right: 0" for="time"><i
+                          class="glyphicon glyphicon-calendar"></i></label>
+                      </span>
+                    <!--<span class="input-group-btn">-->
+                    <!--<span class="input-group-btn">-->
+                      <!--<input ng-pattern="regLeapYear" id="time" name="time" type="text" ng-model="request.timeRequest"-->
+                             <!--class="form-control" placeholder="dd/MM/yyyy HH:mm:ss" trigger="manual" style="width: 92%"-->
+                             <!--required>-->
+                      <!--<button type="button" style="margin-right: 0" class="btn btn-default"-->
+                              <!--ng-model="request.timeRequest" bs-datepicker data-model-date-format="dd/MM/yyyy HH:mm:ss"-->
+                              <!--date-type="string" data-date-format="dd/MM/yyyy HH:mm:ss" autoclose="true"><i-->
+                        <!--class="fa fa-calendar"></i></button>-->
+                        <!--</span>-->
+                  </p>
+                  <div class="help-block" ng-messages="requestAddForm.time.$error" ng-if="requestAddForm.time.$touched">
+                    <p ng-message="required">Vui lòng chọn thời gian!</p>
+                    <!--<p ng-message="pattern">Vui lòng nhập thời gian theo đúng định dạng: dd/MM/yyyy hoặc dd/MM/yyyy-->
+                      <!--HH:mm:ss!</p>-->
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group"
+                   ng-class="{ 'has-error':requestAddForm.contact.$touched && requestAddForm.contact.$invalid }">
+                <label class="control-label col-md-4 col-sm-12 col-xs-12" for="contact">Thông tin liên hệ <span
+                  class="required">*</span>
+                </label>
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                  <input type="text" class="form-control"
+                         ng-pattern="/(^(0|84)(1[2689]|9|8)[0-9]{8}$)|([a-zA-Z0-9]+[a-zA-Z0-9._]+@[a-zA-Z]+\.[a-zA-Z.]{1,10}$)/"
+                         id="contact" name="contact" ng-model="request.contact" placeholder="SĐT/Email" required>
+                  <div class="help-block" ng-messages="requestAddForm.contact.$error"
+                       ng-if="requestAddForm.contact.$touched">
+                    <p ng-message="required">Vui lòng nhập thông tin liên hệ!</p>
+                    <p ng-message="pattern">Thông tin liên hệ chỉ được nhập số điện thoại / email !</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-4 col-sm-6 col-xs-6">Cam kết SLA :</label>
+                <div class="col-md-8 col-sm-4 col-xs-4">
+                  <label ng-if="request.number > 0" style="margin-top: 7px;">{{request.number}} <span
+                    ng-if="request.sla == 1">ngày</span> <span ng-if="request.sla == 2">giờ</span></label>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+
+              <div class="form-group">
+                <label class="control-label col-md-4 col-sm-6 col-xs-6">Tình trạng :</label>
+                <div class="col-md-8 col-sm-4 col-xs-4">
+                  <label style="margin-top: 7px;">OPEN</label>
+                </div>
+              </div>
+
+              <div class="form-group"
+                   ng-class="{ 'has-error':requestAddForm.assigned.$touched && requestAddForm.assigned.$invalid }">
+                <label class="control-label col-md-4 col-sm-12 col-xs-12" for="assigned">Gán xử lý <span
+                  class="required">*</span>
+                </label>
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                  <select class="select2_group select_assigned form-control" name="assigned" id="assigned"
+                          ng-model="request.assigned" required>
+                    <option value="">-Tất cả-</option>
+                    <optgroup ng-repeat="rightGroup in rightGroups" label="{{rightGroup.groupName}}">
+                      <option ng-repeat="item in rightGroup.roleId_user" value="{{item.id}}">{{item.username}}</option>
+                    </optgroup>
+                  </select>
+                  <div class="help-block" ng-messages="requestAddForm.assigned.$error"
+                       ng-if="requestAddForm.assigned.$touched">
+                    <p ng-message="required">Vui lòng chọn gán xử lý!</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group"
+                   ng-class="{ 'has-error':requestAddForm.responsible.$touched && requestAddForm.responsible.$invalid }">
+                <label class="control-label col-md-4 col-sm-12 col-xs-12" for="responsible">Người chịu TN <span
+                  class="required">*</span>
+                </label>
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                  <select class="select2_group select_receiver form-control" name="responsible" id="responsible"
+                          ng-model="request.responsible" required>
+                    <option value="">-Tất cả-</option>
+                    <optgroup ng-repeat="rightGroup in rightGroupByManagers" label="{{rightGroup.groupName}}">
+                      <option ng-repeat="item in rightGroup.roleId_user" value="{{item.id}}">{{item.username}}</option>
+                    </optgroup>
+                  </select>
+                  <div class="help-block" ng-messages="requestAddForm.responsible.$error"
+                       ng-if="requestAddForm.responsible.$touched">
+                    <p ng-message="required">Vui lòng chọn người chịu trách nhiệm!</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group"
+                   ng-class="{ 'has-error':requestAddForm.content.$touched && requestAddForm.content.$invalid }">
+                <label class="control-label col-md-4 col-sm-12 col-xs-12" for="content">Nội dung yêu cầu <span
+                  class="required">*</span>
+                </label>
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                  <textarea name="content" rows="4" class="form-control" id="content" placeholder="Nội dung yêu cầu..."
+                            ng-model="request.content" required></textarea>
+                  <div class="help-block" ng-messages="requestAddForm.content.$error"
+                       ng-if="requestAddForm.content.$touched">
+                    <p ng-message="required">Vui lòng nhập nội dung yêu cầu!</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-4 col-sm-12 col-xs-12">&#32;</label>
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                  <input type="file" name="select_file" id="select_file" ng-model="localFile" file-model="uploadFile"
+                         value="Chọn file upload" data-icon="false"/>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="ln_solid"></div>
+
+          <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
+              <input type="submit"
+                     ng-disabled="!requestAddForm.$dirty || (requestAddForm.$dirty && requestAddForm.$invalid)"
+                     class="btn btn-success" value="Thêm mới"/>
+              <a ui-sref="request.list" class="btn btn-danger">Hủy bỏ</a>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<form name="complaintAddForm" class="form-horizontal mg-top-20px mg-left-20px" method="post"-->
+<!--novalidate>-->
+<!--<input type="file" name="select_file" id="select_file" ng-model="localFile" file-model="uploadFile" value="Chọn file upload" data-icon="false" required>-->
+<!--<br/>-->
+<!--<input type="submit" value="Cập nhật"/>-->
+
+<!--</form>-->

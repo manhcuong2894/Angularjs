@@ -1,0 +1,204 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>{{title}}</h3>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Tìm kiếm
+          <!--<small>different form elements</small>-->
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <form id="demo-form2" name="formDemo" method="post" class="form-horizontal form-label-left" novalidate>
+
+          <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="ticket_code" class="control-label" style="padding: 0">Mã ticket</label>
+                <input type="text" class="form-control" id="ticket_code" ng-model="historyRequest.ticket_code">
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="key" class="control-label" style="padding: 0">Từ khóa</label>
+                <input type="text" class="form-control" id="key" ng-model="request.key_word">
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="NguoiXuLy" class="control-label" style="padding: 0">Người xử lý</label>
+                <select class="select2_multiple form-control" name="NguoiXuLy" id="NguoiXuLy"
+                        ng-model="historyRequest.handler_id" multiple="multiple">
+                  <optgroup ng-repeat="rightGroup in rightGroups" label="{{rightGroup.groupName}}">
+                    <option ng-repeat="item in rightGroup.roleId_user" value="{{item.id}}">{{item.username}}</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="status" class="control-label" style="padding: 0">Tình trạng</label>
+                <select class="form-control" name="service" id="status" ng-model="historyRequest.status">
+                  <option value="">-Tất cả-</option>
+                  <option ng-repeat="statusSearch in statusSearchs" value="{{statusSearch.value}}">
+                    {{statusSearch.label}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="TuNgay" class="control-label" style="padding: 0">Từ ngày</label>
+
+                <div class="input-group">
+                  <input type="text" id="TuNgay" class="form-control" ng-model="historyRequest.start_date"
+                         bs-datepicker autoclose="true" placeholder="dd/MM/yyyy"
+                         data-model-date-format="dd/MM/yyyy" data-date-format="dd/MM/yyyy"
+                         date-type="string"/>
+                  <span class="input-group-btn">
+                        <label class="btn btn-default" style="margin-right: 0" for="TuNgay"><i
+                          class="glyphicon glyphicon-calendar"></i></label>
+                      </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="DenNgay" class="control-label" style="padding: 0">Đến ngày</label>
+                <div class="input-group">
+                  <input type="text" id="DenNgay" class="form-control" ng-model="historyRequest.end_date"
+                         bs-datepicker autoclose="true" placeholder="dd/MM/yyyy"
+                         data-model-date-format="dd/MM/yyyy" data-date-format="dd/MM/yyyy"
+                         date-type="string"/>
+                  <span class="input-group-btn">
+                        <label class="btn btn-default" style="margin-right: 0" for="DenNgay"><i
+                          class="glyphicon glyphicon-calendar"></i></label>
+                      </span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <button ng-click="getHistoryRequest()" style="margin-right: 0" class="btn btn-primary pull-right btn-search"><i
+                class="fa fa-search"></i> Tìm kiếm
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Danh sách lịch sử yêu cầu
+          <!--<small>Tổng số yêu cầu của tôi: 100</small>-->
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="row" style="margin-bottom: 5px; padding: 0 5px">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="record" class="control-label" style="padding: 8px 10px 0 0; margin-bottom: 0; float: left">Số
+              bản ghi: </label>
+            <div class="col-sm-6" style="padding: 0; width: 80px">
+              <select class="form-control" id="record" ng-model="historyRequestPerPage">
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="x_content">
+        <div id="no-more-tables" class="table-responsive">
+
+          <table class="table table-striped jambo_table bulk_action table-bordered request-table" ng-if="noData == 0">
+            <thead>
+            <tr class="headings">
+              <th class="column-title">STT</th>
+              <th class="column-title">Mã ticket</th>
+              <th class="column-title">Người xử lý</th>
+              <th class="column-title">Thời gian xử lý</th>
+              <th class="column-title">Tình trạng</th>
+              <th class="column-title">Mô tả</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+              <td colspan="6" style="text-align: center">Không tìm thấy kết quả theo yêu cầu!</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <table class="table table-striped jambo_table bulk_action table-bordered request-table" ng-if="noData == 1">
+            <thead>
+            <tr class="headings">
+              <th class="column-title">STT</th>
+              <th class="column-title">Mã ticket</th>
+              <th class="column-title">Người xử lý</th>
+              <th class="column-title">Thời gian xử lý</th>
+              <th class="column-title">Tình trạng</th>
+              <th class="column-title">Mô tả</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr class="even pointer"
+                dir-paginate="historyRequest in historyRequests | itemsPerPage: historyRequestPerPage"
+                total-items="totalHistoryRequest"
+                current-page="pagination.current">
+              <td data-title="STT" class="a-center ">{{$index + 1}}</td>
+              <td data-title="Mã ticket">{{historyRequest.MaTicket}}</td>
+              <td data-title="Người xử lý">{{historyRequest.NguoiXuLy}}</td>
+              <td data-title="Thời gian xử lý">{{historyRequest.ThoiGianXuLy}}</td>
+              <td data-title="Tình trạng">{{getStatusLabel(historyRequest.TinhTrang)}}</td>
+              <td data-title="Mô tả">{{historyRequest.MoTa}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <dir-pagination-controls ng-if="noData == 1" on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

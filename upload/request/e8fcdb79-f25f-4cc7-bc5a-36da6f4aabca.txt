@@ -1,0 +1,25 @@
+ ___      ___   __    _  ___   _  _______  __   __  ___   _______ 
+|   |    |   | |  |  | ||   | | ||       ||  | |  ||   | |       |
+|   |    |   | |   |_| ||   |_| ||  _____||  |_|  ||   | |    _  |
+|   |    |   | |       ||      _|| |_____ |       ||   | |   |_| |
+|   |___ |   | |  _    ||     |_ |_____  ||       ||   | |    ___|
+|       ||   | | | |   ||    _  | _____| | |     | |   | |   |    
+|_______||___| |_|  |__||___| |_||_______|  |___|  |___| |___|    
+
+
+1. Bạn đã hiểu Tool hoàn toàn sạch nhưng bị nhận nhầm là virus
+2. Tắt bảo vệ thời gian thực (Windows Defender,...) nếu có trước khi mở Tool
+3. Mật khẩu giải nén là linksvip
+
+---------------------------------------------------------------------------------
+
+LinksVIP Tool - Tool Get link VIP Fshare 4share Tên lửa tốc độ cao
+
+Do Tool kết nối với server LinksVIP trong quá trình Get link nên không tránh khỏi trường hợp một số Antivirus nhận nhầm là Virus. 
+
+Tool hoàn toàn sạch, vì vậy lỡ có bị Antivirus "chụp" thì các bạn cũng đừng lo.
+
+Khi đó các bạn hãy Thêm Tool vào danh sách bỏ chặn, hoặc Tắt tính năng bảo vệ thời gian thực đi nhé!
+
+LinksVIP Team
+https://linksvip.net
